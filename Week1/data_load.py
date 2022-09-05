@@ -20,7 +20,7 @@ from torchtext import data, datasets
 from config import *
 
 
-def data_load(batchsize=64):
+def data_load():
     random.seed(SEED)
     torch.manual_seed(SEED)
 
@@ -34,6 +34,6 @@ def data_load(batchsize=64):
 
     trainset, valset = trainset.split(split_ratio=0.8)
 
-    train_iter, val_iter, test_iter = data.BucketIterator.splits((trainset,valset,testset), batch_size=batchsize, shuffle=True, repeat=False)
+    train_iter, val_iter, test_iter = data.BucketIterator.splits((trainset,valset,testset), batch_size=BATCH_SIZE, shuffle=True, repeat=False)
 
     return TEXT, LABEL, train_iter, val_iter, test_iter
