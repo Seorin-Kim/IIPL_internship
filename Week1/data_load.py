@@ -13,10 +13,17 @@ Original file is located at
 @github : https://github.com/Seorin-Kim
 """
 
+import random
+import torch
 from torchtext import data, datasets
+
+from config import *
 
 
 def data_load(batchsize=64):
+    random.seed(SEED)
+    torch.manual_seed(SEED)
+
     TEXT = data.Field(sequential=True, batch_first=True, lower=True, fix_length=512)
     LABEL = data.Field(sequential=False, batch_first=True)
 
