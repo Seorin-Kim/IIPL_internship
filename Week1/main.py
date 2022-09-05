@@ -40,8 +40,8 @@ def evaluate(model, criterion, val_iter, device):
     return avg_loss, avg_accuracy
 
 def main():
-    TEXT, LABEL, train_iter, val_iter, test_iter = data_load()
-    model = build_model(TEXT, LABEL, DEVICE, MODEL_DIM, N_HEADS, HIDDEN_DIM, N_LAYERS, DROPOUT_RATIO)
+    TEXT, train_iter, val_iter, test_iter = data_load()
+    model = build_model(TEXT, MODEL_DIM, N_HEADS, HIDDEN_DIM, N_LAYERS, DEVICE, DROPOUT_RATIO)
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 

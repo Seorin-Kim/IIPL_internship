@@ -27,4 +27,4 @@ def data_load():
 
     train_iter, val_iter, test_iter = data.BucketIterator.splits((trainset,valset,testset), batch_size=BATCH_SIZE, shuffle=True, repeat=False)
 
-    return TEXT, LABEL, train_iter, val_iter, test_iter
+    return TEXT, train_iter, val_iter, test_iter
