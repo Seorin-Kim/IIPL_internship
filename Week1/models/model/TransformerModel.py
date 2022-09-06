@@ -41,11 +41,11 @@ class TransformerModel(nn.Module):
     # 소스 문장의 <pad> 토큰에 대하여 마스크(mask) 값을 0으로 설정
     def make_src_mask(self, src):
 
-        # src: [batch_size, src_len]
+        # src: [batch_size, hid_dim]
 
         src_mask = (src != self.src_pad_idx).unsqueeze(1).unsqueeze(2)
 
-        # src_mask: [batch_size, 1, 1, src_len]
+        # src_mask: [batch_size, 1, 1, hid_dim]
 
         return src_mask
 

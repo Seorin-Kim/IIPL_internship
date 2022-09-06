@@ -29,15 +29,21 @@ class MultiHeadedAttention(nn.Module):
         
     def forward(self, query, key, value, mask=None):
         
+        # query, key, value = [batch_size, token_length, hid_dim]
+
         batch_size = query.shape[0]
 
         Q = self.fc_q(query)
         K = self.fc_k(key)
         V = self.fc_v(value)
 
+        # Q, K, V = [batch_size, token_length, hid_dim]
+
         Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).permute(0,2,1,3)
         K = K.view(batch_size, -1, self.n_heads, self.head_dim).permute(0,2,1,3)
         V = V.view(batch_size, -1, self.n_heads, self.head_dim).permute(0,2,1,3)
+
+        # Q, K, V = [batch_size, n_heads, token_length, head_dim]
 
         energy = torch.matmul(Q, K.permute(0,1,3,2)) / self.scale
 
